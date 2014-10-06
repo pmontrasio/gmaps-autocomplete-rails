@@ -32,14 +32,14 @@ class GmapsCompleter
 
     completerAssistClass = opts['assist']
 
-    try       
+    try
       @assist = new completerAssistClass
 
     catch error
       @debug 'assist error', error, opts['assist']
-    
+
     @assist ||= new GmapsCompleterDefaultAssist
-    
+
     @defaultOptions = opts['defaultOptions'] || @assist.options
     opts  = $.extend true, {}, @defaultOptions, opts
 
@@ -95,7 +95,7 @@ class GmapsCompleter
     @debug 'mapElem', @mapElem
 
     return if not @mapElem
-    
+
     # create our map object
     @map = new google.maps.Map @mapElem, mapOptions
 
@@ -155,7 +155,7 @@ class GmapsCompleter
     # Google geocoding has succeeded!
     if results[0]
       # Always update the UI elements with new location data
-      @updateUI results[0].formatted_address, results[0].geometry.location
+      @updateUI results[0].formatted_address, results[0].geometry.location, results[0]
 
       # Only update the map (position marker and center map) if requested
       @updateMap(results[0].geometry) if @update
@@ -177,7 +177,7 @@ class GmapsCompleter
       # User has clicked or dragged marker to somewhere that Google can't do a reverse lookup for
       # In this case we display a warning, clear the address box, but fill in LatLng
       @showError @noAddressFoundMsg()
-      @updateUI '', value
+      @updateUI '', value, null
 
   showError: (msg) ->
     $(@errorField).html(msg)
@@ -195,13 +195,13 @@ class GmapsCompleter
     @debug 'region', @region
 
     self = @
-    
+
     autocompleteOpts = opts['autocomplete'] || {}
-    
-    defaultAutocompleteOpts = 
+
+    defaultAutocompleteOpts =
       # event triggered when drop-down option selected
       select: (event,ui) ->
-        self.updateUI  ui.item.value, ui.item.geocode.geometry.location
+        self.updateUI  ui.item.value, ui.item.geocode.geometry.location, ui.item.geocode
         self.updateMap ui.item.geocode.geometry
       # source is the list of input options shown in the autocomplete dropdown.
       # see documentation: http://jqueryui.com/demos/autocomplete/
@@ -268,13 +268,13 @@ class GmapsCompleterDefaultAssist
     marker  = @marker
 
     map.fitBounds(geometry.viewport) if map
-    marker.setPosition(geometry.location) if marker    
+    marker.setPosition(geometry.location) if marker
 
   # fill in the UI elements with new position data
-  updateUI: (address, latLng) ->
+  updateUI: (address, latLng, geocoderResponse) ->
     inputField = @inputField
     country = @country
-    
+
     $(inputField).autocomplete 'close'
 
     @debug 'country', country
@@ -289,7 +289,7 @@ class GmapsCompleterDefaultAssist
 
   positionOutputter: (latLng) ->
     $('#gmaps-output-latitude').html latLng.lat()
-    $('#gmaps-output-longitude').html latLng.lng()  
+    $('#gmaps-output-longitude').html latLng.lng()
 
   geocodeErrorMsg: ->
     "Sorry, something went wrong. Try again!"
