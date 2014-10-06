@@ -259,7 +259,7 @@ GmapsCompleterDefaultAssist = (function() {
     }
   };
 
-  GmapsCompleterDefaultAssist.prototype.updateUI = function(address, latLng) {
+  GmapsCompleterDefaultAssist.prototype.updateUI = function(address, latLng, geocoderResponse) {
     var country, inputField, updateAdr;
     inputField = this.inputField;
     country = this.country;
