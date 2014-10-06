@@ -1,3 +1,9 @@
+## 0.1.5
+
+- 06 October 2014
+
+Added a third argument to updateUI to pass the full geocoder response from Google.
+
 ## 0.1.4
 
 - 23. August 2014

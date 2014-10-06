@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Google Maps v3 search with jQuery UI Autocomplete, ready for use with Rails asset pipeline}
   gem.description = %Q{Easily add autocomplete geo-functionality to your Rails app :)}
   gem.email = "kmandrup@gmail.com"
-  gem.authors = ["Kristian Mandrup"]
+  gem.authors = ["Kristian Mandrup", "Paolo Montrasio"] # see https://github.com/kristianmandrup/gmaps-autocomplete-rails/issues/13
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
