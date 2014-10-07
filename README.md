@@ -424,3 +424,27 @@ Please help out with suggestions and improvements etc!
 
 Copyright (c) 2012 Kristian Mandrup. See LICENSE.txt for
 further details.
+
+## Roadmap update at Oct 07 2014
+
+The original author Kristian Mandrup invited me to fork the gem and
+take it over as he's not on Rails anymore. Check the comments to
+[this issue](https://github.com/kristianmandrup/gmaps-autocomplete-rails/issues/13)
+for that.
+
+His suggestions are
+
+    I would recommend the following redesign...
+
+    Split up the class into these classes:
+
+    - GmapsConfigurator
+    - GmapsGeocoder
+    - GmapsUI
+    - GmapsErrorHandler
+
+    Please spend 1-2 hours and see what you come up with ;) Also add a test suite (TDD).
+    Cheers!
+
+No promises I'll do that as I don't have currently much time.
+Everybody is welcome to contribute :-)
